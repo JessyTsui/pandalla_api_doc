@@ -1,13 +1,82 @@
 ---
-title: Hello World
-description: Your first document
+title: Pandalla API
+description: 专业的AI模型接口代理服务，为企业提供稳定、高效、经济的AI能力接入解决方案
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 
-## What is Next?
+# Pandalla API - 企业级AI模型统一接入平台
+
+Pandalla API是专为企业和开发者打造的AI模型统一接入平台，致力于提供最便捷、最稳定的AI服务接入体验。通过我们的平台，您可以用一套API标准访问全球顶尖的AI模型服务。
+
+## ✨ 核心优势
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
+  <Card title="🌐 全模型覆盖" description="OpenAI GPT系列、Claude、Gemini、Midjourney、DALL-E、Suno AI等全球顶尖AI模型" />
+  <Card title="🚀 极简接入" description="零代码改动，只需更换API endpoint即可使用，完全兼容OpenAI SDK" />
+  <Card title="💰 成本优化" description="0.3x - 1.8x官方价格的多个渠道，实时透明定价，企业享受专属折扣" />
+  <Card title="🛡️ 企业级保障" description="7x24小时服务监控，全球多地部署，严格遵循企业数据安全标准" />
 </Cards>
+
+## 🔧 快速开始
+
+只需三步即可开始使用服务：
+
+### 1️⃣ 修改接口地址
+将您现有代码中的OpenAI API地址替换为：
+```
+https://api.openai.com → https://api.pandalla.ai
+```
+
+### 2️⃣ 获取API密钥
+访问 [令牌管理页面](https://api.pandalla.ai/token) 创建您的专属API密钥
+
+### 3️⃣ 选择服务渠道
+根据业务需求选择合适的服务档位
+
+## 💡 代码示例
+
+<Tabs items={['Python', 'JavaScript']}>
+  <Tab value="Python">
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.pandalla.ai/v1",  # 仅需修改这一行
+    api_key="your-Pandalla-api-key"
+)
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Hello, Pandalla!"}]
+)
+```
+  </Tab>
+  <Tab value="JavaScript">
+```javascript
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+    baseURL: 'https://api.pandalla.ai/v1',  // 仅需修改这一行
+    apiKey: 'your-Pandalla-api-key'
+});
+
+const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [{ role: 'user', content: 'Hello, Pandalla!' }]
+});
+```
+  </Tab>
+</Tabs>
+
+## 📚 文档导航
+
+<Cards>
+  <Card title="🚀 快速开始" href="/docs/getting-started" description="立即开始使用Pandalla API，几分钟内完成接入" />
+  <Card title="📖 使用指南" href="/docs/guide" description="详细的API使用说明，包含所有模型和高级功能" />
+  <Card title="🎬 视频生成" href="/docs/sora" description="使用Sora模型生成高质量AI视频的完整指南" />
+  <Card title="💻 代码示例" href="/docs/examples" description="各种编程语言的代码示例和最佳实践" />
+</Cards>
+
+---

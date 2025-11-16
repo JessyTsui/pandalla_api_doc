@@ -9,18 +9,35 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { AIToolbar } from '@/components/ai-toolbar';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
+  const slugSegments = params.slug ?? [];
+  const docPath =
+    slugSegments.length > 0 ? `/docs/${slugSegments.join('/')}` : '/docs';
   const MDX = page.data.body;
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsTitle
+        className="text-4xl font-semibold tracking-tight text-foreground"
+        style={{ marginBottom: '0.3rem' }}
+      >
+        {page.data.title}
+      </DocsTitle>
+      <DocsDescription
+        className="text-base text-muted-foreground"
+        style={{ marginTop: '0.1rem', marginBottom: '0.75rem' }}
+      >
+        {page.data.description}
+      </DocsDescription>
+      <div className="mt-1 mb-8">
+        <AIToolbar pageUrl={docPath} pageTitle={page.data.title} />
+      </div>
       <DocsBody>
         <MDX
           components={getMDXComponents({
