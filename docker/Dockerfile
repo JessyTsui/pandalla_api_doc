@@ -7,7 +7,7 @@ COPY package.json bun.lockb ./
 COPY source.config.ts tsconfig.json ./
 RUN bun install --frozen-lockfile --ignore-scripts
 
-FROM node:22-bookworm-slim AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -24,28 +24,29 @@ RUN mkdir -p public
 RUN node --input-type=module -e "import { rm } from 'fs/promises'; import { postInstall } from 'fumadocs-mdx/next'; await rm('.source',{recursive:true,force:true}); await postInstall('source.config.ts','.source');" \
   && npm run build
 
-FROM node:22-bookworm-slim AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3000
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends nginx ca-certificates bash curl \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
-  && mkdir -p /run/nginx \
-  && addgroup --system nginx && adduser --system --ingroup nginx --no-create-home nginx
+RUN apk add --no-cache nginx curl bash ca-certificates \
+  && mkdir -p /run/nginx /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp \
+  && addgroup -S nginx >/dev/null 2>&1 || true \
+  && adduser -S -G nginx nginx >/dev/null 2>&1 || true \
+  && chown -R nginx:nginx /run/nginx /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp
 
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY docker/start.sh /start.sh
+COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=builder /app/.next/standalone ./standalone
 COPY --from=builder /app/.next/static ./standalone/.next/static
 COPY --from=builder /app/public ./standalone/public
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD curl -f http://127.0.0.1:3000/ || exit 1
+RUN chown -R nginx:nginx /app
 
-EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD curl -f http://127.0.0.1:8080/ || exit 1
 
-ENTRYPOINT ["/bin/sh", "/start.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+USER nginx
+
+EXPOSE 8080
+
+CMD ["bash", "-lc", "node /app/standalone/server.js & exec nginx -g 'daemon off;'"]

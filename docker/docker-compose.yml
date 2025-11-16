@@ -5,8 +5,8 @@ services:
       dockerfile: docker/Dockerfile
     environment:
       NODE_ENV: production
-      PORT: 3001
+      PORT: 3000
       HOSTNAME: 0.0.0.0
     ports:
-      - "10008:3000"
+      - "10008:8080"
     restart: unless-stopped
