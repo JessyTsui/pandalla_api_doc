@@ -1,7 +1,7 @@
 services:
   pandalla-docs:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile
     environment:
       NODE_ENV: production
