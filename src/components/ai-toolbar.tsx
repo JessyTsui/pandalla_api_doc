@@ -109,8 +109,8 @@ export function AIToolbar({
 
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      console.error('Copy failed:', error);
+    } catch {
+      // Silently fail - clipboard API may not be available
     }
   };
 
