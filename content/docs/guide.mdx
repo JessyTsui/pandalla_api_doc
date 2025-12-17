@@ -1,6 +1,6 @@
 ---
 title: 使用指南
-description: Pandalla API详细使用说明，包含所有模型的调用方法和高级功能配置
+description: Dubrify API详细使用说明，包含所有模型的调用方法和高级功能配置（Pandalla API 同样适用）
 ---
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
@@ -9,16 +9,18 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 
 # API接口使用指南
 
-Pandalla API提供统一的API接口标准，**完全兼容OpenAI API格式**，支持无缝切换。通过一个接口地址即可访问包括OpenAI、Claude、Gemini、Midjourney等在内的所有主流AI模型。
+Dubrify API提供统一的API接口标准，**完全兼容OpenAI API格式**，支持无缝切换。通过一个接口地址即可访问包括OpenAI、Claude、Gemini、Midjourney等在内的所有主流AI模型。
 
 ## 🌐 基础配置
 
 ### API地址
-将原始OpenAI API地址替换为Pandalla API地址：
+将原始OpenAI API地址替换为Dubrify API地址：
 ```
 原地址: https://api.openai.com
 新地址: https://api.pandalla.ai
 ```
+
+> 备用渠道：`https://api.dubrify.com` 同样可用
 
 ### 身份认证
 在 [令牌管理页面](https://api.pandalla.ai/token) 生成您的专属API密钥
@@ -50,7 +52,7 @@ from openai import OpenAI
 # 初始化客户端
 client = OpenAI(
     base_url="https://api.pandalla.ai/v1",
-    api_key="sk-your-Pandalla-api-key"  # 替换为您的密钥
+    api_key="sk-your-api-key"  # 替换为您的密钥
 )
 
 # 发起聊天请求
@@ -58,7 +60,7 @@ response = client.chat.completions.create(
     model="gpt-4o-mini",
     max_tokens=16384,
     messages=[
-        {"role": "user", "content": "你好，介绍一下Pandalla平台"}
+        {"role": "user", "content": "你好，介绍一下Dubrify平台"}
     ]
 )
 
@@ -71,7 +73,7 @@ print(response.choices[0].message.content)
 ```bash
 curl --request POST \
     --url https://api.pandalla.ai/v1/chat/completions \
-    --header 'Authorization: Bearer sk-your-Pandalla-api-key' \
+    --header 'Authorization: Bearer sk-your-api-key' \
     --header 'Content-Type: application/json' \
     --data '{
         "model": "gpt-4o-mini",
@@ -95,7 +97,7 @@ curl --request POST \
 #### 多模态图像理解
 ```bash
 curl https://api.pandalla.ai/v1/chat/completions \
-    --header 'Authorization: Bearer sk-your-Pandalla-api-key' \
+    --header 'Authorization: Bearer sk-your-api-key' \
     --header 'Content-Type: application/json' \
     --data '{
         "model": "gpt-4-vision-preview",
@@ -170,7 +172,7 @@ response = client.chat.completions.create(
 ```bash
 curl -X POST https://api.pandalla.ai/v1/chat/completions \
     --header 'Content-Type: application/json' \
-    --header 'Authorization: Bearer sk-your-Pandalla-api-key' \
+    --header 'Authorization: Bearer sk-your-api-key' \
     --data '{
         "model": "gemini-1.5-flash-002",
         "messages": [
@@ -195,7 +197,7 @@ curl -X POST https://api.pandalla.ai/v1/chat/completions \
 ```bash
 curl -X POST https://api.pandalla.ai/v1/chat/completions \
     --header 'Content-Type: application/json' \
-    --header 'Authorization: Bearer sk-your-Pandalla-api-key' \
+    --header 'Authorization: Bearer sk-your-api-key' \
     --data '{
         "model": "gemini-1.5-flash-002",
         "messages": [
@@ -378,7 +380,7 @@ from openai import OpenAI
 # ✅ 使用环境变量存储密钥
 client = OpenAI(
     base_url="https://api.pandalla.ai/v1",
-    api_key=os.getenv("Pandalla_API_KEY")
+    api_key=os.getenv("API_KEY")
 )
 
 # ❌ 不要在代码中硬编码密钥

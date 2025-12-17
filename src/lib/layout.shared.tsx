@@ -4,7 +4,7 @@ import { layoutConfig } from '@/app/layout.config';
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      title: 'Pandalla API',
+      title: 'Dubrify API',
     },
     links: layoutConfig.links,
   };

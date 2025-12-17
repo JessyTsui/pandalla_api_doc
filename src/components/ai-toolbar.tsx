@@ -50,7 +50,7 @@ export function AIToolbar({
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const baseUrl = 'https://doc.pandalla.ai';
+  const baseUrl = 'https://doc.dubrify.com';
   const normalizedPath = pageUrl
     ? pageUrl.startsWith('/')
       ? pageUrl
@@ -70,7 +70,7 @@ export function AIToolbar({
       id: 'github',
       label: 'Open in GitHub',
       icon: Github,
-      href: 'https://github.com/pandalla',
+      href: 'https://github.com/dubrify',
       accent: 'bg-slate-100 text-slate-900',
     },
     {

@@ -1,6 +1,6 @@
 ---
 title: 代码示例
-description: 各种编程语言的Pandalla API代码示例和最佳实践
+description: 各种编程语言的Dubrify API代码示例和最佳实践（Pandalla API 同样适用）
 ---
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
@@ -9,7 +9,7 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 
 # 代码示例
 
-本页面提供了使用 Pandalla API 的完整代码示例，涵盖各种常见用例和编程语言。
+本页面提供了使用 Dubrify API 的完整代码示例，涵盖各种常见用例和编程语言。
 
 ## 🚀 快速开始示例
 
@@ -81,18 +81,18 @@ import (
     "fmt"
     "log"
     
-    "github.com/pandalla/pandalla-go"
+    "github.com/dubrify/dubrify-go"
 )
 
 func main() {
-    client := pandalla.NewClient(
-        pandalla.WithAPIKey("sk-your-api-key"),
-        pandalla.WithBaseURL("https://api.pandalla.ai/v1"),
+    client := dubrify.NewClient(
+        dubrify.WithAPIKey("sk-your-api-key"),
+        dubrify.WithBaseURL("https://api.pandalla.ai/v1"),
     )
 
-    resp, err := client.ChatCompletion(context.Background(), pandalla.ChatCompletionRequest{
+    resp, err := client.ChatCompletion(context.Background(), dubrify.ChatCompletionRequest{
         Model: "gpt-4o-mini",
-        Messages: []pandalla.Message{
+        Messages: []dubrify.Message{
             {Role: "system", Content: "你是一个有帮助的AI助手。"},
             {Role: "user", Content: "请解释什么是机器学习？"},
         },
@@ -463,19 +463,19 @@ import logging
 from typing import Optional, List, Dict, Any
 from openai import OpenAI
 
-class PandallaClient:
-    """Pandalla API客户端封装类"""
-    
+class DubrifyClient:
+    """Dubrify API客户端封装类（Pandalla API 同样适用）"""
+
     def __init__(self, api_key: Optional[str] = None):
         """
         初始化客户端
-        
+
         Args:
             api_key: API密钥，如果不提供则从环境变量读取
         """
-        self.api_key = api_key or os.getenv("PANDALLA_API_KEY")
+        self.api_key = api_key or os.getenv("API_KEY")
         if not self.api_key:
-            raise ValueError("API密钥未提供，请设置PANDALLA_API_KEY环境变量或传入api_key参数")
+            raise ValueError("API密钥未提供，请设置API_KEY环境变量或传入api_key参数")
         
         self.client = OpenAI(
             base_url="https://api.pandalla.ai/v1",
@@ -583,14 +583,14 @@ class PandallaClient:
 # 使用示例
 if __name__ == "__main__":
     # 初始化客户端
-    pandalla = PandallaClient()
-    
+    dubrify = DubrifyClient()
+
     # 简单聊天
-    response = pandalla.chat("解释一下什么是深度学习")
+    response = dubrify.chat("解释一下什么是深度学习")
     print("AI回复:", response)
-    
+
     # 翻译
-    translation = pandalla.translate("Hello, how are you today?", "中文")
+    translation = dubrify.translate("Hello, how are you today?", "中文")
     print("翻译结果:", translation)
     
     # 摘要
@@ -601,7 +601,7 @@ if __name__ == "__main__":
     来模拟人脑的工作方式。近年来，深度学习在图像识别、语音识别和自然语言处理等领域
     取得了突破性进展。
     """
-    summary = pandalla.summarize(long_text, "简短")
+    summary = dubrify.summarize(long_text, "简短")
     print("摘要:", summary)
 ```
 
@@ -715,7 +715,7 @@ else:
 ```
 
 <Callout type="info">
-这些示例展示了Pandalla API的各种使用场景。你可以根据自己的需求调整和扩展这些代码。更多示例和最新功能，请参考 [API参考文档](/docs/api-reference)。
+这些示例展示了Dubrify API的各种使用场景。你可以根据自己的需求调整和扩展这些代码。更多示例和最新功能，请参考 [API参考文档](/docs/api-reference)。
 </Callout>
 
 ## 📚 更多资源
