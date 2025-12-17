@@ -32,24 +32,24 @@ const inter = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Pandalla API Documentation',
-    template: '%s | Pandalla API',
+    default: 'Dubrify API Documentation',
+    template: '%s | Dubrify API',
   },
-  description: 'Comprehensive API documentation for Pandalla AI services. Learn how to integrate and use our AI APIs for your applications.',
-  keywords: ['API', 'Documentation', 'Pandalla', 'AI', 'Machine Learning', 'Developer'],
-  authors: [{ name: 'Pandalla AI' }],
+  description: 'Comprehensive API documentation for Dubrify AI services. Learn how to integrate and use our AI APIs for your applications.',
+  keywords: ['API', 'Documentation', 'Dubrify', 'AI', 'Machine Learning', 'Developer'],
+  authors: [{ name: 'Dubrify AI' }],
   openGraph: {
-    title: 'Pandalla API Documentation',
-    description: 'Comprehensive API documentation for Pandalla AI services',
-    url: 'https://docs.pandalla.ai',
-    siteName: 'Pandalla API Docs',
+    title: 'Dubrify API Documentation',
+    description: 'Comprehensive API documentation for Dubrify AI services',
+    url: 'https://docs.dubrify.com',
+    siteName: 'Dubrify API Docs',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pandalla API Documentation',
-    description: 'Comprehensive API documentation for Pandalla AI services',
+    title: 'Dubrify API Documentation',
+    description: 'Comprehensive API documentation for Dubrify AI services',
   },
   robots: {
     index: true,

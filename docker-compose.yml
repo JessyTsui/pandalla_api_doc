@@ -1,5 +1,5 @@
 services:
-  pandalla-docs:
+  dubrify-docs:
     build:
       context: .
       dockerfile: docker/Dockerfile
